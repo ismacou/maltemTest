@@ -1,3 +1,10 @@
-<p>
-  movie works!
-</p>
+<div *ngIf="movie" class="col-xs-12 container">
+  <div class="card shadow row text-dark">
+    <div class="card-title text-center h3 font-weight-bold">{{ movie.title }}</div>
+    <footer class="row container pl-3">
+      <div class="text-lef col-4 pb-0">{{ movie.director }}</div>
+      <div class="text-center col-4 pb-0">{{ movie.type }}</div>
+      <div class="text-right col-4 pb-0 pr-1">{{ movie.releaseDate | date: 'dd/MM/yyyy' }}</div>
+    </footer>
+  </div>
+</div>

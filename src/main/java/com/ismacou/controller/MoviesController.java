@@ -20,11 +20,23 @@ public class MoviesController {
 
 	@GetMapping
 	public ResponseEntity<Object> getAllMovies(){
-		HashMap<String, Object> response = new LinkedHashMap<>();
+		Object response = new LinkedHashMap<>();
 		try {
 			List<Movie> movies = new ArrayList<>();
 			moviesRepository.findAll().forEach(movie -> movies.add(movie));
-			response.put("movies", movies);
+			response = movies;
+			return new ResponseEntity(response, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getMovie(@PathVariable String id){
+		Object response = new LinkedHashMap<>();
+		try {
+			Movie movie = moviesRepository.findById(Long.valueOf(id)).get();
+			response = movie;
 			return new ResponseEntity(response, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,7 +63,6 @@ public class MoviesController {
 	public ResponseEntity<Object> updateMovie(@PathVariable String id, @RequestBody Map<String, String> params) {
 		HashMap<String, java.lang.Object> response = new LinkedHashMap<>();
 		try {
-
 			String releaseDate = new SimpleDateFormat("dd/MM/yyyy").format(params.get("releaseDate"));
 			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateMovie = formatter.parse(releaseDate);
