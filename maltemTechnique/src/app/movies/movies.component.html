@@ -2,18 +2,46 @@
   <div class="col-12">
     <div class="container-fluid">
       <div class="h4">Liste des films</div>
-      <button (click)="sortByTitle()" class="btn btn-info">Sort by title</button>
-      <button (click)="selectedMovie('create')" class="btn btn-warning">Add a movie</button>
+      <div class="row">
+        <div class="col-6">
+          <button (click)="sortByTitle()" class="btn btn-info">Sort by title</button>
+          <button (click)="selectedMovie('create')" class="btn btn-warning">Add a movie</button>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="input-group col" [formGroup]="formMovie">
+              <div class="form-group">
+                <input formControlName="titleSearch" type="text" class="form-control position-relative" placeholder="Search by Title">
+              </div>
+            </div>
+            <div class="input-group col" [formGroup]="formMovie">
+              <div class="form-group">
+                <input formControlName="directorSearch" type="text" class="form-control position-relative" placeholder="Search by Director">
+              </div>
+            </div>
+            <div class="input-group col" [formGroup]="formMovie">
+              <div class="form-group">
+                <input formControlName="typeSearch" type="text" class="form-control position-relative" placeholder="Search by Type">
+              </div>
+            </div>
+            <div class="input-group col" [formGroup]="formMovie">
+              <div class="form-group">
+                <input formControlName="yearSearch" type="text" class="form-control position-relative" placeholder="Search by year">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <ul class="card">
         <li *ngIf="movies" class="card-body row">
-          <div *ngFor="let movie of movies" class="col-md-4 col-sm-6 col-xs-12 mb-3">
+          <div *ngFor="let movie of moviesToSee" class="col-md-4 col-sm-6 col-xs-12 mb-3">
             <div class="container" style="height: 200px;">
               <a class="card shadow row card-link text-dark h-100" (click)="selectedMovie(movie)">
                 <div class="card-title text-center h3 font-weight-bold">{{ movie.title }}</div>
                 <div class="row container pl-3">
-                  <div class="text-lef col-4 pb-0">{{ movie.director }}</div>
-                  <div class="text-center col-4 pb-0">{{ movie.type }}</div>
-                  <div class="text-right col-4 pb-0 pr-1">{{ movie.releaseDate | date: 'dd/MM/yyyy' }}</div>
+                  <div class="text-lef col pb-0">{{ movie.director }}</div>
+                  <div class="text-center col pb-0">{{ movie.type }}</div>
+                  <div class="text-right col pb-0 pr-1">{{ movie.releaseDate | date: 'dd/MM/yyyy' }}</div>
                 </div>
               </a>
             </div>
