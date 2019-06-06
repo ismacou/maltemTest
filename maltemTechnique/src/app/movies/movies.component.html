@@ -6,19 +6,21 @@
       <button (click)="selectedMovie('create')" class="btn btn-warning">Add a movie</button>
       <ul class="card">
         <li *ngIf="movies" class="card-body row">
-          <div *ngFor="let movie of movies" class="col-md-4 col-sm-6 col-xs-12">
-            <a class="card shadow row card-link text-dark" (click)="selectedMovie(movie)">
-              <div class="card-title text-center h3 font-weight-bold">{{ movie.title }}</div>
-              <footer class="row container pl-3">
-                <div class="text-lef col-4 pb-0">{{ movie.director }}</div>
-                <div class="text-center col-4 pb-0">{{ movie.type }}</div>
-                <div class="text-right col-4 pb-0 pr-1">{{ movie.releaseDate | date: 'dd/MM/yyyy' }}</div>
-              </footer>
-            </a>
+          <div *ngFor="let movie of movies" class="col-md-4 col-sm-6 col-xs-12 mb-3">
+            <div class="container" style="height: 200px;">
+              <a class="card shadow row card-link text-dark h-100" (click)="selectedMovie(movie)">
+                <div class="card-title text-center h3 font-weight-bold">{{ movie.title }}</div>
+                <div class="row container pl-3">
+                  <div class="text-lef col-4 pb-0">{{ movie.director }}</div>
+                  <div class="text-center col-4 pb-0">{{ movie.type }}</div>
+                  <div class="text-right col-4 pb-0 pr-1">{{ movie.releaseDate | date: 'dd/MM/yyyy' }}</div>
+                </div>
+              </a>
+            </div>
           </div>
         </li>
       </ul>
     </div>
   </div>
 </section>
-<app-add-movie *ngIf="movieToEdited" [movie]="movieToEdited" (returnValue)="initialize($event)"></app-add-movie>
+<app-movie *ngIf="movieToEdited" [movie]="movieToEdited" (returnValue)="initialize($event)"></app-movie>

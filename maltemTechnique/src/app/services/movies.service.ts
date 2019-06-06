@@ -26,4 +26,8 @@ export class MoviesService {
   public createMovie(movie) {
     return this.httpClient.post(`${urls.API_REQUEST_MOVIES}`, movie);
   }
+
+  public deleteMovie(id) {
+    return this.httpClient.delete(`${urls.API_REQUEST_MOVIES}/${id}`);
+  }
 }

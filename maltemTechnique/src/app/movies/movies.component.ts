@@ -29,6 +29,9 @@ export class MoviesComponent implements OnInit {
   }
 
   initialize(event) {
+    this.moviesService.getMovies().subscribe(movies => {
+      this.movies = movies;
+    })
     this.movieToEdited = null;
   }
 
